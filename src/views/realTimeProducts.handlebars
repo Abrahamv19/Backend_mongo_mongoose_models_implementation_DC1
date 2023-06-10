@@ -1,33 +1,36 @@
-<h1 class="text-center">Real Time Products</h1>
-<table id="table" class="table bg-gradient bg-info" >
- <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col" >Title</th>
-      <th scope="col" >Description</th>
-      <th scope="col" >Price</th>
-      <th scope="col" >Thumbnail</th>
-      <th scope="col" >Status</th>
-      <th scope="col" >Category</th>
-      <th scope="col" >Code</th>
-      <th scope="col" >Stock</th>
-    </tr>
-  </thead>
-<tbody>
-      {{#each data}}
-      <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.title}}</td>
-        <td>{{this.description}}</td>
-        <td>{{this.price}}</td>
-        <td>{{this.thumbnail}}</td>
-        <td>{{this.status}}</td>
-        <td>{{this.category}}</td>
-        <td>{{this.code}}</td>
-        <td>{{this.stock }}</td>     
-      </tr>
-      {{/each}}
-</tbody>
-</table>
+<div class="bg-primary bg-gradient text-white">
+  <h1>Realtime Products</h1>
+
+
+  <form id="myForm">
+    <label for="title">Title:</label> name
+    <input type="text" name="title" id="title" required />
+
+    <label for="description">Description:</label>
+    <textarea name="description" id="description" required></textarea>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" required />
+
+    <label for="thumbnails">Thumbnails (comma-separated URLs):</label>
+    <input type="text" name="thumbnails" id="thumbnails" required />
+
+    <label for="code">Code:</label>
+    <input type="text" name="code" id="code" required />
+
+    <label for="stock">Stock:</label>
+    <input type="number" name="stock" id="stock" required />
+
+    <label for="category">Category:</label>
+    <input type="text" name="category" id="category" required />
+
+    <button type="submit" value="Submit">Submit</button>
+  </form>
+
+  <ul id="allProducts">
+
+  </ul>
+
+</div>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/indexRealtime.js"></script>
+<script src="./js/index.js"></script>

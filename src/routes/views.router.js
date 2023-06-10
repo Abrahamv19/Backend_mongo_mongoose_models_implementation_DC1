@@ -1,24 +1,32 @@
 // @ts-check
-import express from "express"
+import express from "express";
 import { Router } from "express";
-import { ProductManager } from "../productManager.js";
+// import { ProductManager } from "../dao/services/productManager.js";
+import { ProductManagerMongo } from "../dao/services/products.service.js";
+// const productManager = new ProductManager();
+const productManagerMongo = new ProductManagerMongo(); 
 
-import { io } from "../app.js";
 export const viewsRouter = Router();
-const productManager = new ProductManager('./products.json');
 
-viewsRouter.use(express.urlencoded({ extended: true }));
 viewsRouter.use(express.json());
+viewsRouter.use(express.urlencoded({ extended: true }));
 
-// plantilla Home Handlebars
-viewsRouter.get('/', async (req,res)=>{
-    const result = await productManager.getProducts();
-    // res.render('home',{result, style: 'home.css'});
-    res.render('home',{data:result});
+viewsRouter.get("/", async (req, res) => {
+  let allProducts = await productManagerMongo.getProducts();
+  let mapAllproducts = allProducts.map((product) => {
+    return {
+      title: product.title,
+      description: product.description,
+      price: product.price,
+    };
+  });
+  res.render("home", { mapAllproducts });
 });
 
-// plantilla realTimeProducts Handlebars    
-viewsRouter.get('/realtimeproducts', async (req,res)=>{
-    const result = await productManager.getProducts();
-    res.render('realTimeProducts',{data:result});
+viewsRouter.get("/realtimeproducts", async (req, res) => {
+  res.render("realTimeProducts", {});
+});
+
+viewsRouter.get("/chat", async (req, res) => {
+  res.render("chat", {});
 });

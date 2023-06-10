@@ -1,18 +1,21 @@
-import path from "path";
+// @ts-check
 import { fileURLToPath } from "url";
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+import { connect } from "mongoose";
 
-
-import multer from "multer";
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, __dirname + "/public");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
 export default __dirname;
-export const uploader = multer({ storage });
+
+export async function connectMongo() {
+  try {
+    await connect(
+      "mongodb+srv://hugoabrahamv19:nUnEo6GgvLB16DT8@codercluster.foujega.mongodb.net/ecommerce?retryWrites=true&w=majority"
+    );
+    console.log("success pluging to mongo");
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error de conexión");
+  }
+}
+
