@@ -1,0 +1,33 @@
+<h1 class="text-center">Real Time Products</h1>
+<table id="table" class="table bg-gradient bg-info" >
+ <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col" >Title</th>
+      <th scope="col" >Description</th>
+      <th scope="col" >Price</th>
+      <th scope="col" >Thumbnail</th>
+      <th scope="col" >Status</th>
+      <th scope="col" >Category</th>
+      <th scope="col" >Code</th>
+      <th scope="col" >Stock</th>
+    </tr>
+  </thead>
+<tbody>
+      {{#each data}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.thumbnail}}</td>
+        <td>{{this.status}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.code}}</td>
+        <td>{{this.stock }}</td>     
+      </tr>
+      {{/each}}
+</tbody>
+</table>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/indexRealtime.js"></script>
